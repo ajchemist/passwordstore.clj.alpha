@@ -1,0 +1,5 @@
+{
+ :template               "ajchemist.templates/package"
+ :template/deps-name     io.github.ajchemist/clojure-templates
+ :template/deps-manifest #:git{:sha "5783f8553d1f26b829afd520b3a83377fb03b21c", :url "https://github.com/ajchemist/clojure-templates.git"}
+ }
