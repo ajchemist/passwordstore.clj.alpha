@@ -28,7 +28,9 @@
       (not (zero? exit))
       nil
 
-      (str/index-of out (str pass-name "\n├── ")) ; dir entry check
+      (or
+        (str/index-of out (str pass-name "\n└── "))
+        (str/index-of out (str pass-name "\n├── "))) ; dir entry check
       nil
 
       (str/index-of out "content-disposition: attachment;")
