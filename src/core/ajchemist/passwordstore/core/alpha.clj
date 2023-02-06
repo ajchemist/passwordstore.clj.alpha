@@ -1,4 +1,4 @@
-(ns io.github.ajchemist.passwordstore.core.alpha
+(ns ajchemist.passwordstore.core.alpha
   (:require
    [clojure.string :as str]
    [clojure.java.shell :as jsh]
