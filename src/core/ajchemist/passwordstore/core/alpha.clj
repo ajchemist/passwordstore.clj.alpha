@@ -33,7 +33,7 @@
         (str/index-of out (str pass-name "\n├── "))) ; dir entry check
       nil
 
-      (str/index-of out "content-disposition: attachment;")
+      (re-find #"(?i)content-disposition: attachment;" out)
       (let [tmpf (File/createTempFile "pass-copy-" "")]
         (jsh/sh "gopass" "fscopy" pass-name (.getPath tmpf))
         (slurp tmpf))
