@@ -1,20 +1,13 @@
 (ns ajchemist.passwordstore.core.alpha
   (:require
    [clojure.string :as str]
+   [clojure.java.io :as jio]
    [clojure.java.shell :as jsh]
+   [ajchemist.passwordstore.core.shell.alpha :as shell]
    )
   (:import
    java.io.File
    ))
-
-
-#_(defn sh-exit!
-  [{:keys [exit out err] :as sh-return}]
-  (let [output (str err out)]
-    (when-not (str/blank? output)
-      (println output)))
-  (when-not (zero? exit)
-    (throw (ex-info "Non-zero exit." sh-return))))
 
 
 (defn show
@@ -39,3 +32,30 @@
         (slurp tmpf))
 
       :else (str/trim-newline out))))
+
+
+(defn generate
+  [pass-name]
+  (tap> [:info "pass" "generate" pass-name])
+  (shell/exit! (jsh/sh "pass" "generate" pass-name)))
+
+
+(defn fscopy-from-file
+  [from to]
+  (let [from (.getPath (jio/as-file from))
+        to   (str to)]
+    (tap> [:info "gopass" "fscopy" from to])
+    (shell/exit! (jsh/sh "gopass" "fscopy" from to))))
+
+
+(defn fscopy-from-vault
+  [from to]
+  (let [from (str from)
+        to   (.getPath (jio/as-file to))]
+    (tap> [:info "gopass" "fscopy" from to])
+    (shell/exit! (jsh/sh "gopass" "fscopy" from to))))
+
+
+(defn git-pull
+  ([]
+   (shell/exit! (jsh/sh "pass" "git" "pull" "origin" "master"))))
