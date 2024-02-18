@@ -30,7 +30,12 @@
                     :version   version
                     :basis     basis
                     :scm       {:url (or scm-url github-scm-url "")}
-                    :src-dirs  ["src/core"]})
+                    :src-dirs  ["src/core"]
+                    :pom-data  [[:licenses
+                                [:license
+                                 [:name "MIT License"]
+                                 [:url "https://opensource.org/license/mit/"]
+                                 [:distribution "repo"]]]]})
   (build/copy-file {:src    (build/pom-path {:class-dir class-dir :lib lib})
                     :target "pom.xml"})
   (build/copy-dir {:src-dirs   ["src/core"]
