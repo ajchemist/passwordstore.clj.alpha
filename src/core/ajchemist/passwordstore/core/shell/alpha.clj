@@ -1,4 +1,7 @@
-(ns ajchemist.passwordstore.core.shell.alpha)
+(ns ajchemist.passwordstore.core.shell.alpha
+  (:require
+   [clojure.string :as str]
+   ))
 
 
 (defn exit!
